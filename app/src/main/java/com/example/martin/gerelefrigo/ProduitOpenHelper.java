@@ -12,9 +12,10 @@ public class ProduitOpenHelper extends SQLiteOpenHelper{
     public static final int DATABASE_VERSION = 1;
 
     public static final String PRODUIT_TABLE_NAME = "Produits";
-    public static final String PRODUIT_COL_ID = "NUM_P";
-    public static final String PRODUIT_COL_REEL = "Libelle";
-    public static final String PRODUIT_COL_STOCKAGE = "Stockage";
+    public static final String PRODUIT_COL_NOM = "NomProduit";
+    public static final String PRODUIT_COL_LIBELLE = "Libelle";
+    public static final String PRODUIT_COL_CODE = "CodeBarre";
+    public static final String PRODUIT_COL_CATEGORIE = "Categorie";
 
     public static final String REEL_TABLE_NAME = "ProduitsReels";
     public static final String REEL_COL_LIBELLE = "Libelle";
@@ -29,7 +30,8 @@ public class ProduitOpenHelper extends SQLiteOpenHelper{
             " (" + REEL_COL_LIBELLE +" TEXT, "+ REEL_COL_CATEGORIES + " TEXT, "+ REEL_COL_MARQUE +" TEXT);";
 
     private static final String TABLES_PRODUIT_CREATE = "CREATE TABLE " + PRODUIT_TABLE_NAME +
-            " (" + PRODUIT_COL_ID +" INTEGER, "+ PRODUIT_COL_REEL + " TEXT, "+ PRODUIT_COL_STOCKAGE +" TEXT);";
+            " (" + PRODUIT_COL_NOM +" TEXT, "+ PRODUIT_COL_LIBELLE + " TEXT, "+ PRODUIT_COL_CODE +" INTEGER," +
+            PRODUIT_COL_CATEGORIE + "TEXT );";
 
     private static final String TABLES_STOCKAGE_CREATE = "CREATE TABLE " + STOCKAGE_TABLE_NAME +
             " (" + STOCKAGE_COL_NOM +" TEXT, "+ STOCKAGE_COL_TYPE +" TEXT);";
