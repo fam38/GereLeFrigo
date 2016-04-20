@@ -60,12 +60,39 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public List<ProduitReel> storeProduitReel(Context context, List<ProduitReel> articles) {
-        return null;
+        clearProduit(context);
+        SQLiteDatabase db = null;
+        try{
+            db = produitOpenHelper.getWritableDatabase();
+            ContentValues insertValue = null;
+            for(ProduitReel article : articles){
+                insertValue.put(ProduitOpenHelper.REEL_COL_PRODUIT, article.getProduit().getNomProduit());
+                insertValue.put(ProduitOpenHelper.REEL_COL_STOCKAGE, article.getStockage().getNomStockage());
+                insertValue.put(ProduitOpenHelper.REEL_COL_DATE, String.valueOf(article.getDateExpiration()));
+                db.insert(ProduitOpenHelper.REEL_TABLE_NAME, null, insertValue);
+            }
+            return restoreProduitReel(context);
+        }finally {
+            db.close();
+        }
     }
 
     @Override
     public List<Stockage> storeStockage(Context context, List<Stockage> articles) {
-        return null;
+        clearProduit(context);
+        SQLiteDatabase db = null;
+        try{
+            db = produitOpenHelper.getWritableDatabase();
+            ContentValues insertValue = null;
+            for(Stockage article : articles){
+                insertValue.put(ProduitOpenHelper.STOCKAGE_COL_NOM, article.getNomStockage());
+                insertValue.put(ProduitOpenHelper.STOCKAGE_COL_TYPE, article.getType());
+                db.insert(ProduitOpenHelper.STOCKAGE_TABLE_NAME, null, insertValue);
+            }
+            return restoreStockage(context);
+        }finally {
+            db.close();
+        }
     }
 
     @Override
@@ -88,12 +115,40 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public List<ProduitReel> restoreProduitReel(Context context) {
-        return null;
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try{
+            db = produitOpenHelper.getWritableDatabase();
+            cursor = db.query(ProduitOpenHelper.REEL_TABLE_NAME, new String[]{produitOpenHelper.REEL_COL_STOCKAGE}, null, null, null, null, null);
+            ArrayList elements = new ArrayList<Produit>() {};
+            while(cursor.moveToNext()){
+                elements.add(new ProduitReel(null, null,null)); // récuperer toutes les variables... problème variable
+            }
+            cursor.close();
+            return elements;
+        }finally {
+            closeDB(db);
+        }
+
     }
 
     @Override
     public List<Stockage> restoreStockage(Context context) {
-        return null;
+
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try{
+            db = produitOpenHelper.getWritableDatabase();
+            cursor = db.query(ProduitOpenHelper.STOCKAGE_TABLE_NAME, new String[]{produitOpenHelper.STOCKAGE_COL_NOM}, null, null, null, null, null);
+            ArrayList elements = new ArrayList<Produit>() {};
+            while(cursor.moveToNext()){
+                elements.add(new Produit(cursor.getString(0), cursor.getString(0), cursor.getString(0), cursor.getString(0))); // récuperer toutes les variables...
+            }
+            cursor.close();
+            return elements;
+        }finally {
+            closeDB(db);
+        }
     }
 
     @Override
@@ -110,12 +165,28 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public List<ProduitReel> clearProduitReel(Context context) {
-        return null;
+
+        SQLiteDatabase db= null;
+        try{
+            db = produitOpenHelper.getWritableDatabase();
+            db.delete(ProduitOpenHelper.REEL_TABLE_NAME, null, null);
+            return restoreProduitReel(context);
+        }finally {
+            closeDB(db);
+        }
     }
 
     @Override
     public List<Stockage> clearStockage(Context context) {
-        return null;
+
+        SQLiteDatabase db= null;
+        try{
+            db = produitOpenHelper.getWritableDatabase();
+            db.delete(ProduitOpenHelper.STOCKAGE_TABLE_NAME, null, null);
+            return restoreStockage(context);
+        }finally {
+            closeDB(db);
+        }
     }
 
     @Override
@@ -136,12 +207,31 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public void addProduitReel(Context context, ProduitReel article) {
-
+        SQLiteDatabase db = null;
+        try {
+            db = produitOpenHelper.getWritableDatabase();
+            ContentValues insertValue = new ContentValues();
+            insertValue.put(ProduitOpenHelper.REEL_COL_PRODUIT, article.getProduit().getNomProduit());
+            insertValue.put(ProduitOpenHelper.REEL_COL_STOCKAGE, article.getStockage().getNomStockage());
+            insertValue.put(ProduitOpenHelper.REEL_COL_DATE, String.valueOf(article.getDateExpiration()));
+            long rowId = db.insert(ProduitOpenHelper.REEL_TABLE_NAME, null, insertValue);
+        }finally {
+            closeDB(db);
+        }
 
     }
 
     @Override
     public void addStockage(Context context, Stockage article) {
-
+        SQLiteDatabase db = null;
+        try {
+            db = produitOpenHelper.getWritableDatabase();
+            ContentValues insertValue = new ContentValues();
+            insertValue.put(ProduitOpenHelper.STOCKAGE_COL_NOM, article.getNomStockage());
+            insertValue.put(ProduitOpenHelper.STOCKAGE_COL_TYPE, article.getType());
+            long rowId = db.insert(ProduitOpenHelper.STOCKAGE_TABLE_NAME, null, insertValue);
+        }finally {
+            closeDB(db);
+        }
     }
 }
