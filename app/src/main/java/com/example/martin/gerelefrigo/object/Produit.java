@@ -1,5 +1,7 @@
 package com.example.martin.gerelefrigo.object;
 
+import java.util.ArrayList;
+
 /**
  * Created by Martin on 30/03/2016.
  */
@@ -9,11 +11,14 @@ public class Produit {
     private String CodeBarre;
     private String Categorie;
 
+    private static ArrayList<Produit> listeProduit = new ArrayList<>();
+
     public Produit(String nomProduit, String libelle, String codeBarre, String categorie) {
         this.nomProduit = nomProduit;
         Libelle = libelle;
         CodeBarre = codeBarre;
         Categorie = categorie;
+        listeProduit.add(this);
     }
 
     public String getNomProduit() {
@@ -46,5 +51,13 @@ public class Produit {
 
     public void setCategorie(String categorie) {
         Categorie = categorie;
+    }
+
+    public static Produit getProduit(String nomProduit){
+        for(Produit produit : Produit.listeProduit){
+            if(produit.getNomProduit().equals(nomProduit))
+                return produit;
+        }
+        return null;
     }
 }

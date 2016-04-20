@@ -13,7 +13,9 @@ package com.example.martin.gerelefrigo;
 
         import java.io.Closeable;
         import java.io.IOException;
+        import java.text.DateFormat;
         import java.util.ArrayList;
+        import java.util.Date;
         import java.util.List;
 
 public class StorageServiceImpl implements StorageService {
@@ -122,7 +124,7 @@ public class StorageServiceImpl implements StorageService {
             cursor = db.query(ProduitOpenHelper.REEL_TABLE_NAME, new String[]{produitOpenHelper.REEL_COL_STOCKAGE}, null, null, null, null, null);
             ArrayList elements = new ArrayList<Produit>() {};
             while(cursor.moveToNext()){
-                elements.add(new ProduitReel(null, null,null)); // récuperer toutes les variables... problème variable
+                elements.add(new ProduitReel(Produit.getProduit(cursor.getString(0)), Stockage.getStockage(cursor.getString(1)), null)); // récuperer toutes les variables... problème variable
             }
             cursor.close();
             return elements;
