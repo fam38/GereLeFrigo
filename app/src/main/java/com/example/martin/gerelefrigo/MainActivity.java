@@ -12,10 +12,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.example.martin.gerelefrigo.object.Produit;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private ListView listViewProduit;
+    private ArrayAdapter<String> adapter;
+    private FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +48,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        listViewProduit = (ListView) findViewById(R.id.content_main_listview_produit);
+
+        adapter = new ArrayAdapter<String>(this, R.layout.listview_produit);
+        listViewProduit.setAdapter(adapter);
     }
 
     @Override
@@ -97,5 +110,22 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    protected void onResume() {
+        super.onResume();
+        List<String>listNom = null;
+        List<Produit> produitList = ((MyApplication) getApplication()).getStorageService().restoreProduit(this);
+        for(int i=0; i<produitList.size();i++){
+            listNom.add(produitList.get(i).getNomProduit());
+        }
+        if (listNom != null)
+        updateAdapter(listNom);
+    }
+
+
+    protected void updateAdapter(List<String> produitList){
+        adapter.clear();
+        adapter.addAll(produitList);
+        adapter.notifyDataSetChanged();
     }
 }
