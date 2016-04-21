@@ -125,6 +125,7 @@ public class StorageServiceImpl implements StorageService {
             cursor = db.query(ProduitOpenHelper.REEL_TABLE_NAME, new String[]{produitOpenHelper.REEL_COL_STOCKAGE}, null, null, null, null, null);
             ArrayList elements = new ArrayList<ProduitReel>() {};
             while(cursor.moveToNext()){
+
                 elements.add(new ProduitReel(Produit.getProduit(cursor.getString(0)), Stockage.getStockage(cursor.getString(1)), null)); // récuperer toutes les variables... problème variable
             }
             cursor.close();
