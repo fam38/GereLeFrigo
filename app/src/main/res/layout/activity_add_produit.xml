@@ -14,8 +14,12 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/activity_add_listproduit"/>;
+        android:id="@+id/activity_add_liststock"/>;
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_add_listproduit"/>;
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

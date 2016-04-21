@@ -104,7 +104,8 @@ public class StorageServiceImpl implements StorageService {
         Cursor cursor = null;
         try{
             db = produitOpenHelper.getWritableDatabase();
-            cursor = db.query(ProduitOpenHelper.PRODUIT_TABLE_NAME, new String[]{produitOpenHelper.PRODUIT_COL_NOM}, null, null, null, null, null);
+            cursor = db.rawQuery("select * from " + ProduitOpenHelper.PRODUIT_TABLE_NAME, null);
+            //cursor = db.query(ProduitOpenHelper.PRODUIT_TABLE_NAME, new String[]{produitOpenHelper.PRODUIT_COL_NOM}, null, null, null, null, null);
             ArrayList elements = new ArrayList<Produit>() {};
             while(cursor.moveToNext()){
                 elements.add(new Produit(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3))); // récuperer toutes les variables...
@@ -141,7 +142,8 @@ public class StorageServiceImpl implements StorageService {
         Cursor cursor = null;
         try{
             db = produitOpenHelper.getWritableDatabase();
-            cursor = db.query(ProduitOpenHelper.REEL_TABLE_NAME, new String[]{produitOpenHelper.REEL_COL_STOCKAGE}, null, null, null, null, null);
+            cursor = db.rawQuery("select * from " + ProduitOpenHelper.REEL_TABLE_NAME, null);
+            //cursor = db.query(ProduitOpenHelper.REEL_TABLE_NAME, new String[]{produitOpenHelper.REEL_COL_STOCKAGE}, null, null, null, null, null);
             ArrayList elements = new ArrayList<ProduitReel>() {};
             while(cursor.moveToNext()){
 

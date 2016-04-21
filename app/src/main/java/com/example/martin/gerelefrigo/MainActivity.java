@@ -60,7 +60,12 @@ public class MainActivity extends AppCompatActivity
         Stockage frigo = new Stockage("frigo", "refregirant");
         ProduitReel cafeDhier = new ProduitReel(cafe,frigo,new Date());
         ((MyApplication) getApplication()).getStorageService().addProduit(this,cafe);
+        ((MyApplication) getApplication()).getStorageService().addProduit(this, new Produit("thé", "the","11010101","boisson"));
+        ((MyApplication) getApplication()).getStorageService().addProduit(this, new Produit("saucisson", "scs","11011101","charcuterie"));
+        ((MyApplication) getApplication()).getStorageService().addProduit(this, new Produit("jambon blanc", "jbb","101010101","charcuterie"));
+        ((MyApplication) getApplication()).getStorageService().addProduit(this, new Produit("gruyere", "gre","00000101","fromage"));
         ((MyApplication) getApplication()).getStorageService().addStockage(this, frigo);
+        ((MyApplication) getApplication()).getStorageService().addStockage(this, new Stockage("placard", "chaud"));
         ((MyApplication) getApplication()).getStorageService().addProduitReel(this, cafeDhier);
         adapter = new ArrayAdapter<String>(this, R.layout.listview_produit);
         listViewProduit.setAdapter(adapter);
@@ -126,18 +131,8 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         ArrayList<String> listNom = new ArrayList<String>();
 
-        Produit cafe = new Produit("cafe","cac","110101","trucbon");
-        Produit the = new Produit("the","THC","110101","trucbon");
-        Stockage frigo = new Stockage("frigo", "refregirant");
-        ProduitReel cafeDhier = new ProduitReel(cafe,frigo,new Date());
-        ((MyApplication) getApplication()).getStorageService().addProduit(this,cafe);
-        ((MyApplication) getApplication()).getStorageService().addStockage(this, frigo);
-        ((MyApplication) getApplication()).getStorageService().addProduitReel(this, cafeDhier);
         listNom = (ArrayList<String>) ((MyApplication) getApplication()).getStorageService().restoreProduitReelNom(this);
-
-        listNom.add(the.getNomProduit());
         if (listNom != null)
-
         updateAdapter(listNom);
     }
 
