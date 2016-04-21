@@ -162,10 +162,11 @@ public class StorageServiceImpl implements StorageService {
         Cursor cursor = null;
         try{
             db = produitOpenHelper.getWritableDatabase();
-            cursor = db.query(ProduitOpenHelper.STOCKAGE_TABLE_NAME, new String[]{produitOpenHelper.STOCKAGE_COL_NOM}, null, null, null, null, null);
+             cursor = db.rawQuery("select * from " + ProduitOpenHelper.STOCKAGE_TABLE_NAME,null);
+            //cursor = db.query(ProduitOpenHelper.STOCKAGE_TABLE_NAME, new String[]{produitOpenHelper.STOCKAGE_COL_NOM}, null, null, null, null, null);
             ArrayList elements = new ArrayList<Stockage>() {};
             while(cursor.moveToNext()){
-                elements.add(new Produit(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3))); // récuperer toutes les variables...
+                elements.add(new Stockage(cursor.getString(0), cursor.getString(1))); // récuperer toutes les variables...
             }
             cursor.close();
             return elements;

@@ -55,7 +55,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         listViewProduit = (ListView) findViewById(R.id.content_main_listview_produit);
-
+        Produit cafe = new Produit("cafe","cac","110101","trucbon");
+        Produit the = new Produit("the","THC","110101","trucbon");
+        Stockage frigo = new Stockage("frigo", "refregirant");
+        ProduitReel cafeDhier = new ProduitReel(cafe,frigo,new Date());
+        ((MyApplication) getApplication()).getStorageService().addProduit(this,cafe);
+        ((MyApplication) getApplication()).getStorageService().addStockage(this, frigo);
+        ((MyApplication) getApplication()).getStorageService().addProduitReel(this, cafeDhier);
         adapter = new ArrayAdapter<String>(this, R.layout.listview_produit);
         listViewProduit.setAdapter(adapter);
     }

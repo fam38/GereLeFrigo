@@ -2,4 +2,6 @@
 <resources>
     <item name="content_main_listview_produit" type="id" />
     <item name="activity_add_button" type="id" />
+    <item name="activity_add_liststock" type="id" />
+    <item name="activity_add_listproduit" type="id" />
 </resources>
