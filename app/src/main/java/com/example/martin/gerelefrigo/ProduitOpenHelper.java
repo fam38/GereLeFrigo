@@ -18,7 +18,7 @@ public class ProduitOpenHelper extends SQLiteOpenHelper{
     public static final String PRODUIT_COL_CATEGORIE = "Categorie";
 
     public static final String REEL_TABLE_NAME = "ProduitsReels";
-    public static final String REEL_COL_DATE = "Date expiration";
+    public static final String REEL_COL_DATE = "DateExpiration";
     public static final String REEL_COL_PRODUIT = "Produit";
     public static final String REEL_COL_STOCKAGE = "Stockage";
 

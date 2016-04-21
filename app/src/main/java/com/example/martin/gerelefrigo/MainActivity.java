@@ -1,5 +1,6 @@
 package com.example.martin.gerelefrigo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -39,8 +40,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent addIntent = new Intent(MainActivity.this, AddProduit.class);
+                startActivity(addIntent);
             }
         });
 
@@ -120,14 +121,16 @@ public class MainActivity extends AppCompatActivity
         ArrayList<String> listNom = new ArrayList<String>();
 
         Produit cafe = new Produit("café","cac","110101","truc bon");
-        Stockage frigo = new Stockage("frigo");
-        ProduitReel cafeDhier = new ProduitReel(new Date(),cafe,frigo);
-
-        List<Produit> produitList = ((MyApplication) getApplication()).getStorageService().restoreProduit(this);
+        Stockage frigo = new Stockage("frigo", "réfrégirant");
+        ProduitReel cafeDhier = new ProduitReel(cafe,frigo,new Date());
+        ((MyApplication) getApplication()).getStorageService().addProduit(this,cafe);
+        ((MyApplication) getApplication()).getStorageService().addStockage(this, frigo);
+        ((MyApplication) getApplication()).getStorageService().addProduitReel(this,cafeDhier);
+        List<ProduitReel> produitList = ((MyApplication) getApplication()).getStorageService().restoreProduitReel(this);
         for(int i=0; i<produitList.size();i++){
-            listNom.add(produitList.get(i).getNomProduit());
+            listNom.add(produitList.get(i).getProduit().getNomProduit());
         }
-        listNom.add(cafe.getNomProduit());
+       // listNom.add(cafeDhier.getProduit().getNomProduit());
         if (listNom != null)
         updateAdapter(listNom);
     }

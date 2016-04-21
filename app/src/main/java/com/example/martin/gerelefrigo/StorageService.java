@@ -45,4 +45,5 @@ public interface StorageService {
     public void addProduit(Context context, Produit article);
     public void addProduitReel(Context context, ProduitReel article);
     public void addStockage(Context context, Stockage article);
+
 }
