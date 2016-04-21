@@ -1,22 +1,22 @@
 package com.example.martin.gerelefrigo;
 
 
-        import android.content.ContentValues;
-        import android.content.Context;
-        import android.database.Cursor;
-        import android.database.sqlite.SQLiteDatabase;
-        import android.util.Log;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
-        import com.example.martin.gerelefrigo.object.Produit;
-        import com.example.martin.gerelefrigo.object.ProduitReel;
-        import com.example.martin.gerelefrigo.object.Stockage;
+import com.example.martin.gerelefrigo.object.Produit;
+import com.example.martin.gerelefrigo.object.ProduitReel;
+import com.example.martin.gerelefrigo.object.Stockage;
 
-        import java.io.Closeable;
-        import java.io.IOException;
-        import java.text.DateFormat;
-        import java.util.ArrayList;
-        import java.util.Date;
-        import java.util.List;
+import java.io.Closeable;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class StorageServiceImpl implements StorageService {
 
