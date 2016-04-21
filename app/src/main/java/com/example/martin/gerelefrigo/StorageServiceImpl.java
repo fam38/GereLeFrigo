@@ -107,7 +107,7 @@ public class StorageServiceImpl implements StorageService {
             cursor = db.query(ProduitOpenHelper.PRODUIT_TABLE_NAME, new String[]{produitOpenHelper.PRODUIT_COL_NOM}, null, null, null, null, null);
             ArrayList elements = new ArrayList<Produit>() {};
             while(cursor.moveToNext()){
-                elements.add(new Produit(cursor.getString(0), cursor.getString(0), cursor.getString(0), cursor.getString(0))); // récuperer toutes les variables...
+                elements.add(new Produit(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3))); // récuperer toutes les variables...
             }
             cursor.close();
             return elements;
@@ -123,7 +123,7 @@ public class StorageServiceImpl implements StorageService {
         try{
             db = produitOpenHelper.getWritableDatabase();
             cursor = db.query(ProduitOpenHelper.REEL_TABLE_NAME, new String[]{produitOpenHelper.REEL_COL_STOCKAGE}, null, null, null, null, null);
-            ArrayList elements = new ArrayList<Produit>() {};
+            ArrayList elements = new ArrayList<ProduitReel>() {};
             while(cursor.moveToNext()){
                 elements.add(new ProduitReel(Produit.getProduit(cursor.getString(0)), Stockage.getStockage(cursor.getString(1)), null)); // récuperer toutes les variables... problème variable
             }
@@ -143,9 +143,9 @@ public class StorageServiceImpl implements StorageService {
         try{
             db = produitOpenHelper.getWritableDatabase();
             cursor = db.query(ProduitOpenHelper.STOCKAGE_TABLE_NAME, new String[]{produitOpenHelper.STOCKAGE_COL_NOM}, null, null, null, null, null);
-            ArrayList elements = new ArrayList<Produit>() {};
+            ArrayList elements = new ArrayList<Stockage>() {};
             while(cursor.moveToNext()){
-                elements.add(new Produit(cursor.getString(0), cursor.getString(0), cursor.getString(0), cursor.getString(0))); // récuperer toutes les variables...
+                elements.add(new Produit(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3))); // récuperer toutes les variables...
             }
             cursor.close();
             return elements;
@@ -203,6 +203,7 @@ public class StorageServiceImpl implements StorageService {
             insertValue.put(ProduitOpenHelper.PRODUIT_COL_CODE, article.getCodeBarre());
             insertValue.put(ProduitOpenHelper.PRODUIT_COL_CATEGORIE, article.getCategorie());
             long rowId = db.insert(ProduitOpenHelper.PRODUIT_TABLE_NAME, null, insertValue);
+
         }finally {
             closeDB(db);
         }
