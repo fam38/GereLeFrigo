@@ -125,11 +125,9 @@ public class MainActivity extends AppCompatActivity
         ProduitReel cafeDhier = new ProduitReel(cafe,frigo,new Date());
         ((MyApplication) getApplication()).getStorageService().addProduit(this,cafe);
         ((MyApplication) getApplication()).getStorageService().addStockage(this, frigo);
-        ((MyApplication) getApplication()).getStorageService().addProduitReel(this,cafeDhier);
-        List<ProduitReel> produitList = ((MyApplication) getApplication()).getStorageService().restoreProduitReel(this);
-        for(int i=0; i<produitList.size();i++){
-            listNom.add(produitList.get(i).getProduit().getNomProduit());
-        }
+        ((MyApplication) getApplication()).getStorageService().addProduitReel(this, cafeDhier);
+        List<String> produitList = ((MyApplication) getApplication()).getStorageService().restoreProduitReelNom(this);
+
        // listNom.add(cafeDhier.getProduit().getNomProduit());
         if (listNom != null)
         updateAdapter(listNom);

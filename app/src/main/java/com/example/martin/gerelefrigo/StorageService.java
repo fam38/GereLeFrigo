@@ -27,7 +27,7 @@ public interface StorageService {
     public List<Produit> restoreProduit(Context context);
     public List<ProduitReel> restoreProduitReel(Context context);
     public List<Stockage> restoreStockage(Context context);
-
+    public List<String> restoreProduitReelNom(Context context);
     /**
      * Vide la liste des articles.
      * @param context contexte de l'activité
