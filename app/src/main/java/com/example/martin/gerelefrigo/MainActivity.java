@@ -16,7 +16,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.martin.gerelefrigo.object.Produit;
+import com.example.martin.gerelefrigo.object.ProduitReel;
+import com.example.martin.gerelefrigo.object.Stockage;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -113,11 +117,17 @@ public class MainActivity extends AppCompatActivity
     }
     protected void onResume() {
         super.onResume();
-        List<String>listNom = null;
+        ArrayList<String> listNom = new ArrayList<String>();
+
+        Produit cafe = new Produit("café","cac","110101","truc bon");
+        Stockage frigo = new Stockage("frigo");
+        ProduitReel cafeDhier = new ProduitReel(new Date(),cafe,frigo);
+
         List<Produit> produitList = ((MyApplication) getApplication()).getStorageService().restoreProduit(this);
         for(int i=0; i<produitList.size();i++){
             listNom.add(produitList.get(i).getNomProduit());
         }
+        listNom.add(cafe.getNomProduit());
         if (listNom != null)
         updateAdapter(listNom);
     }
