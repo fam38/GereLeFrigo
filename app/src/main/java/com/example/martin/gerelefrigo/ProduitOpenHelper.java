@@ -30,8 +30,8 @@ public class ProduitOpenHelper extends SQLiteOpenHelper{
             " (" + REEL_COL_PRODUIT +" TEXT, "+ REEL_COL_STOCKAGE + " TEXT, "+ REEL_COL_DATE +" TEXT);";
 
     private static final String TABLES_PRODUIT_CREATE = "CREATE TABLE " + PRODUIT_TABLE_NAME +
-            " (" + PRODUIT_COL_NOM +" TEXT, "+ PRODUIT_COL_LIBELLE + " TEXT, "+ PRODUIT_COL_CODE +" INTEGER," +
-            PRODUIT_COL_CATEGORIE + "TEXT );";
+            " (" + PRODUIT_COL_NOM +" TEXT, "+ PRODUIT_COL_LIBELLE + " TEXT, "+ PRODUIT_COL_CODE +" INTEGER, " +
+            PRODUIT_COL_CATEGORIE + " TEXT);";
 
     private static final String TABLES_STOCKAGE_CREATE = "CREATE TABLE " + STOCKAGE_TABLE_NAME +
             " (" + STOCKAGE_COL_NOM +" TEXT, "+ STOCKAGE_COL_TYPE +" TEXT);";

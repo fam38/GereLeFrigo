@@ -23,6 +23,7 @@ public class StorageServiceImpl implements StorageService {
     private final ProduitOpenHelper produitOpenHelper;
 
     public StorageServiceImpl(Context context) {
+        context.deleteDatabase ("FRIGO_DB") ;
         produitOpenHelper = new ProduitOpenHelper(context);
     }
 

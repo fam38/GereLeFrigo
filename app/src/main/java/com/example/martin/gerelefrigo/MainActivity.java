@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         ArrayList<String> listNom = new ArrayList<String>();
 
-        Produit cafe = new Produit("café","cac","110101","truc bon");
-        Stockage frigo = new Stockage("frigo", "réfrégirant");
+        Produit cafe = new Produit("cafe","cac","110101","trucbon");
+        Stockage frigo = new Stockage("frigo", "refregirant");
         ProduitReel cafeDhier = new ProduitReel(cafe,frigo,new Date());
         ((MyApplication) getApplication()).getStorageService().addProduit(this,cafe);
         ((MyApplication) getApplication()).getStorageService().addStockage(this, frigo);
