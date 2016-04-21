@@ -115,6 +115,25 @@ public class StorageServiceImpl implements StorageService {
             closeDB(db);
         }
     }
+    @Override
+    public List<String> restoreProduitReelNom(Context context) {
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try{
+            db = produitOpenHelper.getWritableDatabase();
+            cursor = db.query(ProduitOpenHelper.REEL_TABLE_NAME, new String[]{produitOpenHelper.REEL_COL_PRODUIT}, null, null, null, null, null);
+            ArrayList elements = new ArrayList<String>() {};
+            while(cursor.moveToNext()){
+
+                elements.add(cursor.getString(0)); // récuperer toutes les variables... problème variable
+            }
+            cursor.close();
+            return elements;
+        }finally {
+            closeDB(db);
+        }
+
+    }
 
     @Override
     public List<ProduitReel> restoreProduitReel(Context context) {

@@ -121,15 +121,17 @@ public class MainActivity extends AppCompatActivity
         ArrayList<String> listNom = new ArrayList<String>();
 
         Produit cafe = new Produit("cafe","cac","110101","trucbon");
+        Produit the = new Produit("the","THC","110101","trucbon");
         Stockage frigo = new Stockage("frigo", "refregirant");
         ProduitReel cafeDhier = new ProduitReel(cafe,frigo,new Date());
         ((MyApplication) getApplication()).getStorageService().addProduit(this,cafe);
         ((MyApplication) getApplication()).getStorageService().addStockage(this, frigo);
         ((MyApplication) getApplication()).getStorageService().addProduitReel(this, cafeDhier);
-        List<String> produitList = ((MyApplication) getApplication()).getStorageService().restoreProduitReelNom(this);
+        listNom = (ArrayList<String>) ((MyApplication) getApplication()).getStorageService().restoreProduitReelNom(this);
 
-       // listNom.add(cafeDhier.getProduit().getNomProduit());
+        listNom.add(the.getNomProduit());
         if (listNom != null)
+
         updateAdapter(listNom);
     }
 
