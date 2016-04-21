@@ -10,7 +10,7 @@ public class ProduitReel {
     private Produit produit;
     private Stockage stockage;
 
-    public ProduitReel(Date dateExpiration, Produit produit, Stockage stockage) {
+    public ProduitReel(Produit produit, Stockage stockage, Date dateExpiration) {
         DateExpiration = dateExpiration;
         this.produit = produit;
         this.stockage = stockage;
